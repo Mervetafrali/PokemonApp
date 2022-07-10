@@ -37,10 +37,13 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     }
     private fun setScreen() {
 
-        viewModel.pokeResponse.observe(requireActivity()) { result ->
+        viewModel.pokemonsResponse.observe(requireActivity()) { result ->
             Log.i("deneme",result.results.toString())
         }
-
+        viewModel.getPokemon("https://pokeapi.co/api/v2/pokemon/1/")
+        viewModel.pokemonResponse.observe(requireActivity()) { result ->
+            Log.i("deneme2",result.toString())
+        }
     }
 
     override fun onDestroyView() {

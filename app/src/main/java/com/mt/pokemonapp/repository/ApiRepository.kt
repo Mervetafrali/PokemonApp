@@ -9,5 +9,7 @@ class ApiRepository
 
     suspend fun getPokemons() = apiService.getPokemons()
 
+    suspend fun getPokemon(@Url url:String)= apiService.getPokemon(url)
+
 
 }
