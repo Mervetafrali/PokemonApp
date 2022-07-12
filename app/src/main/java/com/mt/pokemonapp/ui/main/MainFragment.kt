@@ -1,32 +1,94 @@
 package com.mt.pokemonapp.ui.main
 
-import androidx.lifecycle.ViewModelProvider
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.provider.Settings
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.mt.pokemonapp.R
+import com.mt.pokemonapp.databinding.FragmentMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class MainFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = MainFragment()
-    }
+@AndroidEntryPoint
+class MainFragment : Fragment(R.layout.fragment_main) {
 
-    private lateinit var viewModel: MainViewModel
+    private var _binding: FragmentMainBinding? = null
+    private val binding get() = _binding!!
+    val REQUEST_CODE = -1010101
+
+    val startForResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                // There are no request codes
+                val data: Intent? = result.data
+                Log.i("tagg", data.toString())
+                navigateFragment()
+            }
+        }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_main, container, false)
+        _binding = FragmentMainBinding.inflate(
+            inflater, container, false
+        )
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
+        if (Settings.canDrawOverlays(requireContext())) {
+            navigateFragment()
+        }
+        binding.button.setOnClickListener {
+            checkPermission()
+        }
+    }
+
+    private fun navigateFragment() {
+        val direction =
+            MainFragmentDirections.actionMainFragmentToPokemonsFragment()
+        view?.findNavController()?.navigate(direction)
+    }
+
+    private fun checkPermission() {
+        if (Build.VERSION.SDK_INT >= 23 && !Settings.canDrawOverlays(requireContext())) {
+            val myIntent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
+            myIntent.data = Uri.parse("package:" + requireActivity().packageName)
+            startForResult.launch(myIntent)
+        } else {
+            navigateFragment()
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        Log.v("App", "OnActivity Result.")
+        //check if received result code
+        //  is equal our requested code for draw permission
+        if (requestCode == REQUEST_CODE) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (Settings.canDrawOverlays(requireContext())) {
+                    navigateFragment()
+                }
+            }
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }
