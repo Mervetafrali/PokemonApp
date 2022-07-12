@@ -9,5 +9,14 @@
         android:id="@+id/mainFragment"
         android:name="com.mt.pokemonapp.ui.main.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" />
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_pokemonsFragment"
+            app:destination="@id/pokemonsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pokemonsFragment"
+        android:name="com.mt.pokemonapp.ui.main.PokemonsFragment"
+        android:label="fragment_pokemons"
+        tools:layout="@layout/fragment_pokemons" />
 </navigation>

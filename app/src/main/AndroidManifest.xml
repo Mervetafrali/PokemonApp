@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.mt.pokemonapp">
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- overlay  permission -->
+    <uses-permission android:name="android.permission.ACTION_MANAGE_OVERLAY_PERMISSION" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <application
         android:name=".helper.MyApplication"
         android:allowBackup="true"
