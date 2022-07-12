@@ -9,7 +9,7 @@
         android:id="@+id/mainFragment"
         android:name="com.mt.pokemonapp.ui.main.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" >
+        tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_mainFragment_to_pokemonsFragment"
             app:destination="@id/pokemonsFragment" />
@@ -18,7 +18,7 @@
         android:id="@+id/pokemonsFragment"
         android:name="com.mt.pokemonapp.ui.main.PokemonsFragment"
         android:label="fragment_pokemons"
-        tools:layout="@layout/fragment_pokemons" >
+        tools:layout="@layout/fragment_pokemons">
         <action
             android:id="@+id/action_pokemonsFragment_to_pokeDetailFragment"
             app:destination="@id/pokeDetailFragment" />
@@ -27,7 +27,7 @@
         android:id="@+id/pokeDetailFragment"
         android:name="com.mt.pokemonapp.ui.main.PokeDetailFragment"
         android:label="fragment_poke_detail"
-        tools:layout="@layout/fragment_poke_detail" >
+        tools:layout="@layout/fragment_poke_detail">
         <argument
             android:name="pokeId"
             app:argType="string" />

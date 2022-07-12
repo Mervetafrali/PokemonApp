@@ -5,6 +5,11 @@
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_poke_detail.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_pokemons.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/overlay.xml" value="0.15353260869565216" />
+        <entry key="app/src/main/res/layout/pokemons_detail.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/pokemons_detail_adapter.xml" value="0.1" />
       </map>
     </option>
   </component>

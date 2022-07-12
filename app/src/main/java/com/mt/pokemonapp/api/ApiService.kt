@@ -13,7 +13,7 @@ interface ApiService {
     suspend fun getPokemons(): Response<Pokemons>
 
     @GET
-    suspend fun getPokemon(@Url url: String):Response<Pokemon>
+    suspend fun getPokemon(@Url url: String): Response<Pokemon>
 
 
 }

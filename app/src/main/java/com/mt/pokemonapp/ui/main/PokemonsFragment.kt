@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.mt.pokemonapp.R
 import com.mt.pokemonapp.adapter.PokemonsAdapter
 import com.mt.pokemonapp.databinding.FragmentPokemonsBinding
@@ -18,8 +18,9 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class PokemonsFragment : Fragment(R.layout.fragment_pokemons) {
-    private var _binding:FragmentPokemonsBinding?=null
-    private val binding get()=_binding!!
+    private var _binding: FragmentPokemonsBinding? = null
+    private lateinit var analytics: FirebaseAnalytics
+    private val binding get() = _binding!!
     private var currentPage = 1
     private var totalAvailablePages = 1
     private val viewModel: ApiViewModel by viewModels()
@@ -33,20 +34,25 @@ class PokemonsFragment : Fragment(R.layout.fragment_pokemons) {
         )
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as AppCompatActivity?)!!.supportActionBar!!.show()
+        analytics = FirebaseAnalytics.getInstance(requireContext())
         setScreen()
+        savedInstanceState?.putString("PokemonsRequest", "Request")
+        analytics.logEvent("FirebaseAnalytics.Param.CONTENT_TYPE", savedInstanceState)
     }
+
     private fun setScreen() {
-        pokemonsAdapter= PokemonsAdapter()
+        pokemonsAdapter = PokemonsAdapter()
         binding.poke.apply {
             layoutManager = GridLayoutManager(activity, 1)
             setHasFixedSize(true)
             adapter = pokemonsAdapter
         }
         viewModel.pokemonsResponse.observe(requireActivity()) { result ->
-            pokemonsAdapter.pokeDetails=result.results
+            pokemonsAdapter.pokeDetails = result.results
         }
 
     }

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "726696979574",
+    "project_id": "pokemonapp-febcf",
+    "storage_bucket": "pokemonapp-febcf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:726696979574:android:34f629a09d19362fb64357",
+        "android_client_info": {
+          "package_name": "com.mt.pokemonapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "726696979574-bjolag3292nmp9488a5m8ue3dpkkee2i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMKOvM5xg8AzsMBo6OO7JlkcEJRLohwxA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "726696979574-bjolag3292nmp9488a5m8ue3dpkkee2i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

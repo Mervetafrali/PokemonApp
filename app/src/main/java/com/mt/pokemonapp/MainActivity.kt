@@ -1,9 +1,9 @@
 package com.mt.pokemonapp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.mt.pokemonapp.ui.main.MainFragment
+import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -12,4 +12,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
     }
+
+
 }

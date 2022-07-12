@@ -13,34 +13,38 @@ import kotlinx.coroutines.launch
 import retrofit2.http.Url
 import javax.inject.Inject
 
+
 @HiltViewModel
 class ApiViewModel
 @Inject
-constructor(private val pokemons:ApiRepository): ViewModel(){
-    private val _response= MutableLiveData<Pokemons>()
-    val pokemonsResponse:LiveData<Pokemons>
-        get()=_response
-    private val _responsePoke=MutableLiveData<Pokemon>()
-    val pokemonResponse:LiveData<Pokemon>
-        get()=_responsePoke
+constructor(private val pokemons: ApiRepository) : ViewModel() {
+    private val _response = MutableLiveData<Pokemons>()
+    val pokemonsResponse: LiveData<Pokemons>
+        get() = _response
+    private val _responsePoke = MutableLiveData<Pokemon>()
+    val pokemonResponse: LiveData<Pokemon>
+        get() = _responsePoke
+
     init {
         getPokemons()
     }
-    fun  getPokemon(url:String){
+
+    fun getPokemon(url: String) {
         getPoke(url)
     }
 
-    private fun getPokemons()=viewModelScope.launch {
+    private fun getPokemons() = viewModelScope.launch {
 
-        pokemons.getPokemons().let { response->
-            if (response.isSuccessful){
+        pokemons.getPokemons().let { response ->
+            if (response.isSuccessful) {
                 _response.postValue(response.body())
-            }else{
+            } else {
                 Log.d("Response", "getPokemons: ${response.code()}")
             }
         }
     }
-    private fun getPoke(@Url url:String) = viewModelScope.launch {
+
+    private fun getPoke(@Url url: String) = viewModelScope.launch {
         pokemons.getPokemon(url).let { response ->
             if (response.isSuccessful) {
                 _responsePoke.postValue(response.body())

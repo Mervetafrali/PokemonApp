@@ -8,34 +8,34 @@
 
     <ImageView
         android:id="@+id/pokeImage"
-        android:src="@drawable/ic_launcher_background"
-        android:layout_margin="16dp"
         android:layout_width="150dp"
-        android:layout_height="150dp"/>
+        android:layout_height="150dp"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_launcher_background" />
 
     <TextView
         android:id="@+id/pokeNameText"
-        android:text="Pokemon Name: bulbasour"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="Pokemon Name: bulbasour" />
 
     <TextView
         android:id="@+id/pokeHeight"
-        android:text="Pokemon Height: 7"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="Pokemon Height: 7" />
 
     <TextView
         android:id="@+id/pokeWeight"
-        android:text="Pokemon Weight: 69"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="Pokemon Weight: 69" />
 
     <Button
         android:id="@+id/overlayButton"
-        android:text="Show Bulbasour In overlay"
-        android:layout_marginTop="16dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Show Bulbasour In overlay" />
 
 </LinearLayout>
