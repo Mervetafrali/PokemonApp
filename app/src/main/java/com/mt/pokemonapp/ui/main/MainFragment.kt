@@ -27,8 +27,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: ApiViewModel by viewModels()
-    val startForResult  = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+     val startForResult  = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             // There are no request codes
             val data: Intent? = result.data

@@ -18,5 +18,18 @@
         android:id="@+id/pokemonsFragment"
         android:name="com.mt.pokemonapp.ui.main.PokemonsFragment"
         android:label="fragment_pokemons"
-        tools:layout="@layout/fragment_pokemons" />
+        tools:layout="@layout/fragment_pokemons" >
+        <action
+            android:id="@+id/action_pokemonsFragment_to_pokeDetailFragment"
+            app:destination="@id/pokeDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pokeDetailFragment"
+        android:name="com.mt.pokemonapp.ui.main.PokeDetailFragment"
+        android:label="fragment_poke_detail"
+        tools:layout="@layout/fragment_poke_detail" >
+        <argument
+            android:name="pokeId"
+            app:argType="string" />
+    </fragment>
 </navigation>
