@@ -30,6 +30,9 @@ class PokeDetailFragment : Fragment(R.layout.fragment_poke_detail) {
     private val viewModel: ApiViewModel by viewModels()
     private val args: PokeDetailFragmentArgs by navArgs()
     private lateinit var name:String
+    private lateinit var front:String
+    private lateinit var back:String
+    private lateinit var namePoke:String
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -55,6 +58,9 @@ class PokeDetailFragment : Fragment(R.layout.fragment_poke_detail) {
         binding.pokeNameText.text=name
         viewModel.getPokemon(name)
         viewModel.pokemonResponse.observe(requireActivity()) { result ->
+            front=result.sprites.front_default
+            back=result.sprites.back_default
+            namePoke=result.name
             binding.pokeImage.load(result.sprites.other.home.front_default) {
                 crossfade(true)
                 crossfade(1000)
@@ -66,7 +72,10 @@ class PokeDetailFragment : Fragment(R.layout.fragment_poke_detail) {
         }
         binding.overlayButton.setOnClickListener { mView ->
             val intent = Intent(requireContext(), Overlay::class.java)
-            requireActivity().startActivity(intent)
+            intent.putExtra("front",front)
+            intent.putExtra("back",back)
+            intent.putExtra("name",namePoke)
+            requireActivity().startService(intent)
         }
 
     }
