@@ -29,7 +29,9 @@ constructor(private val pokemons:ApiRepository): ViewModel(){
     fun  getPokemon(url:String){
         getPoke(url)
     }
+
     private fun getPokemons()=viewModelScope.launch {
+
         pokemons.getPokemons().let { response->
             if (response.isSuccessful){
                 _response.postValue(response.body())

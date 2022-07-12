@@ -8,15 +8,14 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.mt.pokemonapp.databinding.PokemonsDetailAdapterBinding
-import com.mt.pokemonapp.model.Pokemons
 import com.mt.pokemonapp.model.Result
 import com.mt.pokemonapp.ui.main.PokemonsFragmentDirections
 
-class PokemonsAdapter : RecyclerView.Adapter<PokemonsAdapter.MyViewHolder>() {
+class PokemonsAdapter : PagingDataAdapter<Result, PokemonsAdapter.MyViewHolder>(DifferCallback){
     inner class MyViewHolder(val  binding:PokemonsDetailAdapterBinding):
-            RecyclerView.ViewHolder(binding.root)
+        RecyclerView.ViewHolder(binding.root)
 
-    private val differCallback=object :DiffUtil.ItemCallback<Result>(){
+    object DifferCallback :DiffUtil.ItemCallback<Result>(){
         override fun areItemsTheSame(oldItem: Result, newItem: Result): Boolean {
             return oldItem==newItem
         }
@@ -26,7 +25,7 @@ class PokemonsAdapter : RecyclerView.Adapter<PokemonsAdapter.MyViewHolder>() {
         }
 
     }
-    private val differ=AsyncListDiffer(this,differCallback)
+    private val differ= AsyncListDiffer(this,DifferCallback)
     var pokeDetails:List<Result>
         get() = differ.currentList
         set(value){
@@ -47,7 +46,7 @@ class PokemonsAdapter : RecyclerView.Adapter<PokemonsAdapter.MyViewHolder>() {
         }
         holder.binding.pokeNameText.setOnClickListener { mView ->
             val direction =
-                PokemonsFragmentDirections.actionPokemonsFragmentToPokeDetailFragment(holder.binding.pokeNameText.text.toString())
+                PokemonsFragmentDirections.actionPokemonsFragmentToPokeDetailFragment(currentItem.url)
             mView.findNavController().navigate(direction)
         }
     }
